@@ -19,6 +19,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 from streamlit_lottie import st_lottie
 
 
+# Load Animation
+@st.cache_data
+def load_lottie(filepath):
+    with open(filepath, "r", encoding="utf-8") as f:
+        return json.load(f)
+crop_animation = load_lottie("Animation.json")
+
 
 # LOAD ENVIRONMENT VARIABLES SAFELY
 
@@ -70,7 +77,7 @@ t = {
 
 
 # TITLE
-
+st_lottie(crop_animation, height=300)
 st.title(t["title"][lang])
 st.header(t["main_title"][lang])
 st.subheader(t["subtitle"][lang])
@@ -298,4 +305,5 @@ with tab4:
             st.write(query_ai(question, lang))
         else:
             st.warning("Please enter a question.")
+
 
